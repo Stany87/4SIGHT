@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react"
 import { ScrambleTextOnHover } from "@/components/scramble-text"
-import { SplitFlapText, SplitFlapMuteToggle, SplitFlapAudioProvider } from "@/components/split-flap-text"
+import { SplitFlapLogo, SplitFlapMuteToggle, SplitFlapAudioProvider } from "@/components/split-flap-logo"
 import { AnimatedNoise } from "@/components/animated-noise"
 import { BitmapChevron } from "@/components/bitmap-chevron"
 import { SentientSphere } from "@/components/sentient-sphere"
@@ -56,7 +56,7 @@ export function HeroSection() {
       <div ref={contentRef} className="flex-1 w-full relative z-10">
         <SplitFlapAudioProvider>
           <div className="relative">
-            <SplitFlapText text="4SIGHT" speed={80} />
+            <SplitFlapLogo speed={80} />
             <div className="mt-4">
               <SplitFlapMuteToggle />
             </div>
