@@ -94,8 +94,14 @@ export function ProblemSection() {
       {/* Section header */}
       <div ref={headerRef} className="mb-16">
         <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">01 / The Problem</span>
-        <h2 className="mt-4 font-[var(--font-bebas)] text-5xl md:text-7xl tracking-tight text-balance">
-          MOST BUSINESSES DON&apos;T HAVE A GROWTH PROBLEM
+        <h2 className="mt-4 font-[var(--font-bebas)] text-5xl md:text-7xl tracking-tight text-balance flex flex-wrap items-center gap-x-[0.25em] gap-y-1">
+          <span>MOST</span>
+          <img
+            src="/images/businesses-logo.png"
+            alt="BUSINESSES"
+            className="h-[0.9em] w-auto object-contain"
+          />
+          <span>DON&apos;T HAVE A GROWTH PROBLEM</span>
         </h2>
         <p className="mt-4 font-[var(--font-bebas)] text-3xl md:text-5xl tracking-tight text-muted-foreground">
           They have a systems problem.
