@@ -89,8 +89,13 @@ export function ContactSection() {
       {/* Section header */}
       <div ref={headerRef} className="mb-16">
         <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">05 / Contact</span>
-        <h2 className="mt-4 font-[var(--font-bebas)] text-5xl md:text-7xl tracking-tight">
-          LET&apos;S BUILD SOMETHING BETTER
+        <h2 className="mt-4 font-[var(--font-bebas)] text-5xl md:text-7xl tracking-tight flex flex-wrap items-center gap-x-[0.25em] gap-y-1">
+          <img
+            src="/images/engineer-logo.png"
+            alt="ENGINEER"
+            className="h-[0.8em] w-auto object-contain"
+          />
+          <span>YOUR ADVANTAGE</span>
         </h2>
         <p className="mt-4 max-w-lg font-mono text-sm text-muted-foreground leading-relaxed">
           Let&apos;s identify the bottlenecks holding your business back and engineer a solution that drives measurable growth.

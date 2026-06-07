@@ -96,7 +96,14 @@ export function ProcessSection() {
       {/* Section header */}
       <div ref={headerRef} className="mb-24">
         <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">04 / Process</span>
-        <h2 className="mt-4 font-[var(--font-bebas)] text-5xl md:text-7xl tracking-tight">OUR PROCESS</h2>
+        <h2 className="mt-4 font-[var(--font-bebas)] text-5xl md:text-7xl tracking-tight flex flex-wrap items-center gap-x-[0.25em] gap-y-1">
+          <span>OUR</span>
+          <img
+            src="/images/process-logo.png"
+            alt="PROCESS"
+            className="h-[0.8em] w-auto object-contain"
+          />
+        </h2>
       </div>
 
       {/* Staggered steps */}

@@ -122,7 +122,14 @@ export function WorkSection() {
       <div ref={headerRef} className="mb-16 flex items-end justify-between">
         <div>
           <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">03 / Work</span>
-          <h2 className="mt-4 font-[var(--font-bebas)] text-5xl md:text-7xl tracking-tight">RESULTS THAT MATTER</h2>
+          <h2 className="mt-4 font-[var(--font-bebas)] text-5xl md:text-7xl tracking-tight flex flex-wrap items-center gap-x-[0.25em] gap-y-1">
+            <img
+              src="/images/results-logo.png"
+              alt="RESULTS"
+              className="h-[0.8em] w-auto object-contain"
+            />
+            <span>THAT MATTER</span>
+          </h2>
         </div>
         <p className="hidden md:block max-w-xs font-mono text-xs text-muted-foreground text-right leading-relaxed">
           Real outcomes from businesses that transformed their operations.

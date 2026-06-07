@@ -96,7 +96,14 @@ export function SolutionsSection() {
       <div ref={headerRef} className="mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
         <div>
           <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">02 / Solutions</span>
-          <h2 className="mt-4 font-[var(--font-bebas)] text-5xl md:text-7xl tracking-tight">WHAT WE BUILD</h2>
+          <h2 className="mt-4 font-[var(--font-bebas)] text-5xl md:text-7xl tracking-tight flex flex-wrap items-center gap-x-[0.25em] gap-y-1">
+            <span>WHAT WE</span>
+            <img
+              src="/images/build-logo.png"
+              alt="BUILD"
+              className="h-[0.8em] w-auto object-contain"
+            />
+          </h2>
         </div>
         <p className="max-w-xs font-mono text-xs text-muted-foreground text-right leading-relaxed">
           From strategy to execution, we build systems that transform how you operate.
