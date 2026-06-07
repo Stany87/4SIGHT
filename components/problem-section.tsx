@@ -101,6 +101,9 @@ export function ProblemSection() {
             alt="BUSINESSES"
             className="h-[0.8em] w-auto object-contain"
           />
+          <svg viewBox="0 0 24 24" className="h-[0.5em] w-[0.5em] fill-current text-accent mx-1 inline-block align-middle">
+            <path d="M12,2 Q12,12 22,12 Q12,12 12,22 Q12,12 2,12 Q12,12 12,2 Z" />
+          </svg>
           <span>DON&apos;T HAVE A GROWTH PROBLEM</span>
         </h2>
         <p className="mt-4 font-[var(--font-bebas)] text-3xl md:text-5xl tracking-tight text-muted-foreground">
