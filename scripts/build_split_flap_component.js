@@ -80,11 +80,13 @@ chars.forEach((char) => {
   const bounds = letterBounds[char];
   const tileLeft = ((bounds.minX - paddingX - leftBound) / totalWidth) * 100;
   const tileWidth = ((bounds.width + paddingX * 2) / totalWidth) * 100;
+  const shiftPercent = ((currentRollingLeft - tileLeft) / tileWidth) * 100;
   
   tilePositions.push({
     left_settled: `${tileLeft.toFixed(4)}%`,
     left_rolling: `${currentRollingLeft.toFixed(4)}%`,
-    width: `${tileWidth.toFixed(4)}%`
+    width: `${tileWidth.toFixed(4)}%`,
+    shift_percent: `${shiftPercent.toFixed(4)}%`
   });
   
   currentRollingLeft += tileWidth + gap;
@@ -102,7 +104,7 @@ const parentWidthEm = (aspect_ratio * 1.05).toFixed(4);
 const code = `"use client"
 
 import type React from "react"
-import { motion } from "framer-motion"
+import { motion, useAnimation } from "framer-motion"
 import { useMemo, useState, useCallback, useEffect, useRef } from "react"
 import { Volume2, VolumeX } from "lucide-react"
 
@@ -291,6 +293,16 @@ function SplitFlapLogoChar({ char, index, animationKey, skipEntrance, speed, pla
   const bgColor = isSettled ? "rgba(249, 115, 22, 0)" : "rgba(249, 115, 22, 0.15)"
   const borderColor = isSettled ? "rgba(249, 115, 22, 0)" : "rgba(249, 115, 22, 0.3)"
 
+  const controls = useAnimation()
+
+  useEffect(() => {
+    controls.set({ rotateX: -90 })
+    controls.start({
+      rotateX: 0,
+      transition: { duration: 0.12, ease: "linear" }
+    })
+  }, [currentChar, controls])
+
   useEffect(() => {
     if (intervalRef.current) clearInterval(intervalRef.current)
     if (timeoutRef.current) clearTimeout(timeoutRef.current)
@@ -356,12 +368,12 @@ function SplitFlapLogoChar({ char, index, animationKey, skipEntrance, speed, pla
       animate={{
         opacity: 1,
         y: 0,
-        left: isSettled ? TILE_POSITIONS[index].left_settled : TILE_POSITIONS[index].left_rolling,
+        x: isSettled ? "0%" : TILE_POSITIONS[index].shift_percent,
         backgroundColor: bgColor,
         borderColor: borderColor,
       }}
       transition={{
-        left: { type: "spring", stiffness: 120, damping: 14 },
+        x: { type: "spring", stiffness: 120, damping: 14 },
         backgroundColor: { duration: 0.3 },
         borderColor: { duration: 0.3 },
         opacity: { duration: 0.3 },
@@ -369,9 +381,11 @@ function SplitFlapLogoChar({ char, index, animationKey, skipEntrance, speed, pla
       }}
       className="absolute overflow-hidden flex items-center justify-center border"
       style={{
+        left: TILE_POSITIONS[index].left_settled,
         width: TILE_POSITIONS[index].width,
         height: "100%",
         transformStyle: "preserve-3d",
+        willChange: "transform",
       }}
     >
       {/* Mechanical Split-Flap center horizontal line */}
@@ -395,13 +409,7 @@ function SplitFlapLogoChar({ char, index, animationKey, skipEntrance, speed, pla
 
       {/* Rotating folding top flap */}
       <motion.div
-        key={\`\${animationKey}-\${isSettled}-\${currentChar}\`}
-        initial={{ rotateX: -90 }}
-        animate={{ rotateX: 0 }}
-        transition={{
-          duration: 0.15,
-          ease: "linear",
-        }}
+        animate={controls}
         className="absolute inset-0"
         style={{
           backgroundColor: bgColor,
@@ -409,6 +417,7 @@ function SplitFlapLogoChar({ char, index, animationKey, skipEntrance, speed, pla
           backfaceVisibility: "hidden",
           clipPath: "inset(0 0 50% 0)",
           transformOrigin: "center center", // Rotate around the center split-flap line
+          willChange: "transform",
         }}
       >
         <div className="absolute inset-0 flex items-center justify-center">

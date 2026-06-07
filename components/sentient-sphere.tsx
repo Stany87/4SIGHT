@@ -116,7 +116,7 @@ function Sphere() {
 
   return (
     <mesh ref={meshRef}>
-      <icosahedronGeometry args={[1.8, 64]} />
+      <icosahedronGeometry args={[1.8, 32]} />
       <shaderMaterial
         ref={materialRef}
         vertexShader={vertexShader}
@@ -131,10 +131,24 @@ function Sphere() {
 
 export function SentientSphere() {
   const [mounted, setMounted] = useState(false)
+  const [isInView, setIsInView] = useState(true)
+  const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     setMounted(true)
   }, [])
+
+  useEffect(() => {
+    if (typeof window === "undefined" || !containerRef.current) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting)
+      },
+      { threshold: 0.05 }
+    )
+    observer.observe(containerRef.current)
+    return () => observer.disconnect()
+  }, [mounted])
 
   if (!mounted) {
     return (
@@ -145,17 +159,26 @@ export function SentientSphere() {
   }
 
   return (
-    <Canvas
-      camera={{ position: [0, 0, 5], fov: 45 }}
-      className="w-full my-0 h-full py-0"
-      dpr={[1, 2]}
-      gl={{
-        antialias: true,
-        alpha: true,
-      }}
-    >
-      <ambientLight intensity={0.5} />
-      <Sphere />
-    </Canvas>
+    <div ref={containerRef} className="w-full h-full">
+      {isInView ? (
+        <Canvas
+          camera={{ position: [0, 0, 5], fov: 45 }}
+          className="w-full my-0 h-full py-0"
+          dpr={[1, 1.5]}
+          gl={{
+            antialias: true,
+            alpha: true,
+            powerPreference: "high-performance",
+          }}
+        >
+          <ambientLight intensity={0.5} />
+          <Sphere />
+        </Canvas>
+      ) : (
+        <div className="w-full h-full flex items-center justify-center">
+          <div className="w-64 h-64 rounded-full border border-white/5 animate-pulse" />
+        </div>
+      )}
+    </div>
   )
 }
