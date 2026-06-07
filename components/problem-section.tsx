@@ -99,7 +99,7 @@ export function ProblemSection() {
           <img
             src="/images/businesses-logo.png"
             alt="BUSINESSES"
-            className="h-[0.9em] w-auto object-contain"
+            className="h-[0.8em] w-auto object-contain"
           />
           <span>DON&apos;T HAVE A GROWTH PROBLEM</span>
         </h2>
