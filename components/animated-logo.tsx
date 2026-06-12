@@ -41,7 +41,7 @@ function LogoSVG({
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 1254 1254"
+      viewBox="0 350 1254 540"
       className={className}
       {...props}
     >

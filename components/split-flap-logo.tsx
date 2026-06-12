@@ -249,8 +249,8 @@ function SplitFlapLogoChar({ char, index, animationKey, skipEntrance, speed, pla
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const tileDelay = 0.15 * index
-  const bgColor = isSettled ? "rgba(249, 115, 22, 0)" : "rgba(249, 115, 22, 0.15)"
-  const borderColor = isSettled ? "rgba(249, 115, 22, 0)" : "rgba(249, 115, 22, 0.3)"
+  const bgColor = isSettled ? "rgba(6, 182, 212, 0)" : "rgba(6, 182, 212, 0.15)"
+  const borderColor = isSettled ? "rgba(6, 182, 212, 0)" : "rgba(6, 182, 212, 0.3)"
 
   const controls = useAnimation()
 
@@ -315,7 +315,7 @@ function SplitFlapLogoChar({ char, index, animationKey, skipEntrance, speed, pla
     }
     
     return (
-      <span className="font-mono text-orange-500 font-bold leading-none select-none text-[0.8em]">
+      <span className="font-mono text-cyan-500 font-bold leading-none select-none text-[0.8em]">
         {contentChar}
       </span>
     )

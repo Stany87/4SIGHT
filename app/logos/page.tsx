@@ -177,7 +177,7 @@ export default function LogosPage() {
                     variant={v.id}
                     inverted={!currentOverride}
                     color={currentOverride}
-                    className="w-32 h-32 md:w-36 md:h-36 transition-all duration-300"
+                    className="w-48 h-auto md:w-52 transition-all duration-300"
                   />
 
                   {/* Copy tooltip popup */}
