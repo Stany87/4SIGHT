@@ -78,6 +78,17 @@ const caseStudies: CaseStudy[] = [
     image: "/images/portfolio-clockworks-crm.jpg",
     url: "https://clockworks-crm.vercel.app/",
   },
+  {
+    title: "SolarKits ERP Portal",
+    industry: "SolarKits Energy",
+    challenge: "Managing multi-department approvals and tracking inventory logistics across distributed warehouses was slow and prone to delays.",
+    solution: "Designed and engineered a custom enterprise resource planning (ERP) platform with multi-warehouse tracking, department approvals, and automated operation workflows.",
+    metric: "92%",
+    metricLabel: "Operational Efficiency",
+    previousMetric: "processing time slashed from days to minutes",
+    image: "/images/portfolio-solarkits.png",
+    url: "https://solarkits-sigma.vercel.app/",
+  },
 ]
 
 export function WorkSection() {
