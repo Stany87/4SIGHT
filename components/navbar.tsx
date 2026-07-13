@@ -38,6 +38,7 @@ export function Navbar() {
   return (
     <>
       <nav
+        aria-label="Main navigation"
         className={cn(
           "fixed top-0 left-0 right-0 z-[60] transition-all duration-300",
           isScrolled
@@ -48,12 +49,13 @@ export function Navbar() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
-            <Link href="/" className="flex-shrink-0">
+            <Link href="/" className="flex-shrink-0" aria-label="4Sight Agency — Home">
               <AnimatedLogo
                 className="h-16 w-auto"
                 variant="electric-current"
                 inverted
               />
+              <span className="sr-only">4Sight Agency</span>
             </Link>
 
             {/* Desktop Navigation */}

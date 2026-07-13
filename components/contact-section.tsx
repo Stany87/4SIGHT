@@ -92,7 +92,7 @@ export function ContactSection() {
         <h2 className="mt-4 font-[var(--font-bebas)] text-5xl md:text-7xl tracking-tight flex flex-wrap items-center gap-x-[0.25em] gap-y-1">
           <img
             src="/images/engineer-logo.png"
-            alt="ENGINEER"
+            alt="Engineer your competitive advantage - custom software by 4Sight agency"
             className="h-[0.8em] w-auto object-contain"
           />
           <span>YOUR ADVANTAGE</span>
@@ -241,7 +241,7 @@ export function ContactSection() {
 
           {/* Copyright */}
           <p className="font-mono text-[10px] text-muted-foreground uppercase tracking-widest">
-            © 2025 4Sight. All rights reserved.
+            © 2026 4Sight. All rights reserved.
           </p>
         </div>
       </div>

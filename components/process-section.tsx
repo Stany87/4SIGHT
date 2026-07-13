@@ -100,7 +100,7 @@ export function ProcessSection() {
           <span>OUR</span>
           <img
             src="/images/process-logo.png"
-            alt="PROCESS"
+            alt="Our development process - discover, architect, build, automate, scale"
             className="h-[0.8em] w-auto object-contain"
           />
         </h2>

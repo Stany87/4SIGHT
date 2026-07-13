@@ -9,7 +9,7 @@ import { Navbar } from "@/components/navbar"
 
 export default function Page() {
   return (
-    <main className="relative min-h-screen">
+    <main className="relative min-h-screen" aria-label="4Sight Agency — Custom Software Development">
       <Navbar />
       <SideNav />
       <div className="grid-bg fixed inset-0 opacity-30 z-0 pointer-events-none" aria-hidden="true" />

@@ -271,7 +271,7 @@ export function WorkSection() {
           <h2 className="mt-4 font-[var(--font-bebas)] text-5xl md:text-7xl tracking-tight flex flex-wrap items-center gap-x-[0.25em] gap-y-1">
             <img
               src="/images/results-logo.png"
-              alt="RESULTS"
+              alt="Results from custom software development projects by 4Sight agency"
               className="h-[0.8em] w-auto object-contain"
             />
             <span>THAT MATTER</span>

@@ -98,7 +98,7 @@ export function ProblemSection() {
           <span>MOST</span>
           <img
             src="/images/businesses-logo.png"
-            alt="BUSINESSES"
+            alt="Businesses that need systems-focused technology solutions - 4Sight Agency"
             className="h-[0.8em] w-auto object-contain"
           />
           <span>DON&apos;T HAVE A GROWTH PROBLEM</span>

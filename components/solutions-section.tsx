@@ -100,7 +100,7 @@ export function SolutionsSection() {
             <span>WHAT WE</span>
             <img
               src="/images/build-logo.png"
-              alt="BUILD"
+              alt="Build custom software solutions - web apps, SaaS, CRM by 4Sight"
               className="h-[0.8em] w-auto object-contain"
             />
           </h2>

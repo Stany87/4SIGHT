@@ -36,6 +36,8 @@ export function HeroSection() {
 
   return (
     <section ref={sectionRef} id="hero" className="relative min-h-screen flex items-center pl-6 md:pl-28 pr-6 md:pr-12">
+      {/* Visually hidden h1 for SEO — the animated DrawText logo renders invisible text to crawlers */}
+      <h1 className="sr-only">4Sight — Custom Software Development &amp; AI Automation Agency</h1>
       <AnimatedNoise opacity={0.03} />
 
       {/* Sentient Sphere — background layer, far right */}
