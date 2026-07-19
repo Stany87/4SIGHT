@@ -3,25 +3,31 @@ import { ProblemSection } from "@/components/problem-section"
 import { SolutionsSection } from "@/components/solutions-section"
 import { WorkSection } from "@/components/work-section"
 import { ProcessSection } from "@/components/process-section"
+import { TestimonialsSection } from "@/components/testimonials-section"
 import { ContactSection } from "@/components/contact-section"
 import { SideNav } from "@/components/side-nav"
 import { Navbar } from "@/components/navbar"
+import { Footer } from "@/components/footer"
 
 export default function Page() {
   return (
-    <main className="relative min-h-screen" aria-label="4Sight Agency — Custom Software Development">
-      <Navbar />
-      <SideNav />
-      <div className="grid-bg fixed inset-0 opacity-30 z-0 pointer-events-none" aria-hidden="true" />
+    <>
+      <main className="relative min-h-screen" aria-label="4Sight Agency — Custom Software Development">
+        <Navbar />
+        <SideNav />
+        <div className="grid-bg fixed inset-0 opacity-30 z-0 pointer-events-none" aria-hidden="true" />
 
-      <div className="relative z-10">
-        <HeroSection />
-        <ProblemSection />
-        <SolutionsSection />
-        <WorkSection />
-        <ProcessSection />
-        <ContactSection />
-      </div>
-    </main>
+        <div className="relative z-10">
+          <HeroSection />
+          <ProblemSection />
+          <SolutionsSection />
+          <WorkSection />
+          <ProcessSection />
+          <TestimonialsSection />
+          <ContactSection />
+        </div>
+      </main>
+      <Footer />
+    </>
   )
 }

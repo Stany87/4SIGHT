@@ -443,7 +443,7 @@ export function WorkSection() {
                 </div>
               </div>
 
-              <div className="lg:pt-6 flex items-center justify-end">
+              <div className="lg:pt-6 flex items-center justify-end gap-4">
                 {caseStudies[activeIdx].url && (
                   caseStudies[activeIdx].url.startsWith("http") ? (
                     <a
@@ -452,14 +452,14 @@ export function WorkSection() {
                       rel="noopener noreferrer"
                       className="group inline-flex items-center gap-2 border border-accent/20 px-5 py-2.5 font-mono text-xs uppercase tracking-widest text-accent hover:border-accent hover:bg-accent hover:text-black transition-all duration-300"
                     >
-                      Visit Live Project ↗
+                      View Case Study ↗
                     </a>
                   ) : (
                     <Link
                       href={caseStudies[activeIdx].url}
                       className="group inline-flex items-center gap-2 border border-accent/20 px-5 py-2.5 font-mono text-xs uppercase tracking-widest text-accent hover:border-accent hover:bg-accent hover:text-black transition-all duration-300"
                     >
-                      Book Your Project →
+                      View Case Study →
                     </Link>
                   )
                 )}

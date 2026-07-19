@@ -7,36 +7,36 @@ import { ScrollTrigger } from "gsap/ScrollTrigger"
 
 gsap.registerPlugin(ScrollTrigger)
 
-const painPoints = [
+const problemSolutions = [
   {
     icon: "01",
-    title: "Leads Slipping Through",
-    description: "Manual processes causing opportunities to fall through the cracks.",
+    problem: "Website not generating leads",
+    solution: "Custom high-converting websites with built-in analytics and optimized user journeys.",
   },
   {
     icon: "02",
-    title: "Repetitive Tasks",
-    description: "Hours wasted on manual, repetitive workflows every week.",
+    problem: "Too many manual processes",
+    solution: "AI-powered workflow automation that eliminates repetitive tasks and human error.",
   },
   {
     icon: "03",
-    title: "Disconnected Tools",
-    description: "Data scattered across multiple platforms with no central source of truth.",
+    problem: "Poor Google rankings",
+    solution: "Technical SEO, Core Web Vitals optimization, and content strategy that drives organic traffic.",
   },
   {
     icon: "04",
-    title: "Slow Response Times",
-    description: "Delayed customer responses hurting conversion and satisfaction.",
+    problem: "Slow operations",
+    solution: "Custom CRM & ERP systems that streamline workflows and accelerate decision-making.",
   },
   {
     icon: "05",
-    title: "Limited Scalability",
-    description: "Operations that can&apos;t keep pace with business growth.",
+    problem: "Outdated software",
+    solution: "Modern, scalable platform rebuilds with clean architecture and future-proof technology.",
   },
   {
     icon: "06",
-    title: "Operational Inefficiencies",
-    description: "Bottlenecks preventing teams from working at full capacity.",
+    problem: "Lack of automation",
+    solution: "End-to-end business process automation — from lead capture to fulfillment.",
   },
 ]
 
@@ -106,11 +106,14 @@ export function ProblemSection() {
         <p className="mt-4 font-[var(--font-bebas)] text-3xl md:text-5xl tracking-tight text-muted-foreground">
           They have a systems problem.
         </p>
+        <p className="mt-6 max-w-xl font-mono text-sm text-muted-foreground leading-relaxed">
+          Sound familiar? Here&apos;s how we solve each one.
+        </p>
       </div>
 
-      {/* Pain points grid */}
+      {/* Problem → Solution cards */}
       <div ref={cardsRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {painPoints.map((point, index) => (
+        {problemSolutions.map((item, index) => (
           <article
             key={index}
             className={cn(
@@ -118,11 +121,20 @@ export function ProblemSection() {
               "hover:border-accent/60 hover:bg-accent/5",
             )}
           >
-            <span className="font-mono text-[10px] uppercase tracking-widest text-accent">{point.icon}</span>
-            <h3 className="mt-4 font-[var(--font-bebas)] text-2xl tracking-tight group-hover:text-accent transition-colors duration-300">
-              {point.title}
+            <span className="font-mono text-[10px] uppercase tracking-widest text-accent">{item.icon}</span>
+
+            {/* Problem */}
+            <h3 className="mt-4 font-[var(--font-bebas)] text-2xl tracking-tight text-accent/80 group-hover:text-accent transition-colors duration-300">
+              {item.problem}
             </h3>
-            <p className="mt-2 font-mono text-xs text-muted-foreground leading-relaxed">{point.description}</p>
+
+            {/* Divider */}
+            <div className="my-4 h-px w-8 bg-border/40 group-hover:w-16 group-hover:bg-accent/40 transition-all duration-500" />
+
+            {/* Solution */}
+            <p className="font-mono text-xs text-muted-foreground leading-relaxed">
+              {item.solution}
+            </p>
           </article>
         ))}
       </div>

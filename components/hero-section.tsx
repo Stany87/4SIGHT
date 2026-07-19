@@ -75,18 +75,36 @@ export function HeroSection() {
 
         <div className="mt-16 flex items-center gap-8">
           <a
-            href="#solutions"
+            href="#contact"
             className="group inline-flex items-center gap-3 border border-foreground/20 px-6 py-3 font-mono text-xs uppercase tracking-widest text-foreground hover:border-accent hover:text-accent transition-all duration-200"
           >
             <ScrambleTextOnHover text="Book Strategy Call" as="span" duration={0.6} />
             <BitmapChevron className="transition-transform duration-[400ms] ease-in-out group-hover:rotate-45" />
           </a>
           <a
-            href="#work"
+            href="#solutions"
             className="font-mono text-xs uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors duration-200"
           >
-            View Our Work
+            Explore Solutions
           </a>
+        </div>
+
+        {/* Client stats */}
+        <div className="mt-16 flex items-center gap-12 border-t border-border/20 pt-8">
+          {[
+            { value: "50+", label: "Projects Delivered" },
+            { value: "12+", label: "Industries Served" },
+            { value: "98%", label: "Client Satisfaction" },
+          ].map((stat, i) => (
+            <div key={i} className="flex flex-col">
+              <span className="font-[var(--font-bebas)] text-3xl md:text-4xl text-accent tracking-tight">
+                {stat.value}
+              </span>
+              <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mt-1">
+                {stat.label}
+              </span>
+            </div>
+          ))}
         </div>
       </div>
 

@@ -6,7 +6,6 @@ import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { ScrambleTextOnHover } from "@/components/scramble-text"
 import { BitmapChevron } from "@/components/bitmap-chevron"
-import { AnimatedLogo } from "@/components/animated-logo"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -14,7 +13,7 @@ export function ContactSection() {
   const sectionRef = useRef<HTMLElement>(null)
   const headerRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
-  const footerRef = useRef<HTMLDivElement>(null)
+
 
   const [formData, setFormData] = useState({
     name: "",
@@ -61,20 +60,6 @@ export function ContactSection() {
           },
         })
       }
-
-      if (footerRef.current) {
-        gsap.from(footerRef.current, {
-          y: 20,
-          opacity: 0,
-          duration: 0.8,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: footerRef.current,
-            start: "top 95%",
-            toggleActions: "play none none reverse",
-          },
-        })
-      }
     }, sectionRef)
 
     return () => ctx.revert()
@@ -86,17 +71,57 @@ export function ContactSection() {
       id="contact"
       className="relative py-32 pl-6 md:pl-28 pr-6 md:pr-12 border-t border-border/30"
     >
-      {/* Section header */}
-      <div ref={headerRef} className="mb-16">
-        <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">05 / Contact</span>
-        <h2 className="mt-4 font-[var(--font-bebas)] text-5xl md:text-7xl tracking-tight flex flex-wrap items-center gap-x-[0.25em] gap-y-1">
+      {/* Large CTA Banner */}
+      <div ref={headerRef} className="mb-20 border border-border/30 p-8 md:p-16 text-center relative">
+        {/* Accent corners */}
+        <div className="absolute top-0 left-0 w-12 h-12 pointer-events-none">
+          <div className="absolute top-0 left-0 w-full h-[1px] bg-accent" />
+          <div className="absolute top-0 left-0 w-[1px] h-full bg-accent" />
+        </div>
+        <div className="absolute bottom-0 right-0 w-12 h-12 pointer-events-none">
+          <div className="absolute bottom-0 right-0 w-full h-[1px] bg-accent" />
+          <div className="absolute bottom-0 right-0 w-[1px] h-full bg-accent" />
+        </div>
+
+        <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">06 / Contact</span>
+        <h2 className="mt-6 font-[var(--font-bebas)] text-5xl md:text-7xl lg:text-8xl tracking-tight">
+          READY TO ELIMINATE<br className="hidden md:block" /> YOUR BOTTLENECKS?
+        </h2>
+        <p className="mt-6 max-w-lg mx-auto font-mono text-sm text-muted-foreground leading-relaxed">
+          Book a free 30-minute strategy call — no strings attached. We&apos;ll identify your biggest operational gaps and map a path to measurable growth.
+        </p>
+
+        <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-6">
+          <a
+            href="#contact-form"
+            onClick={(e) => {
+              e.preventDefault()
+              document.getElementById("contact-form")?.scrollIntoView({ behavior: "smooth" })
+            }}
+            className="group inline-flex items-center gap-3 border border-foreground/20 px-8 py-4 font-mono text-xs uppercase tracking-widest text-foreground hover:border-accent hover:text-accent transition-all duration-200"
+          >
+            <ScrambleTextOnHover text="Book Strategy Call" as="span" duration={0.6} />
+            <BitmapChevron className="transition-transform duration-[400ms] ease-in-out group-hover:rotate-45" />
+          </a>
+          <a
+            href="mailto:hello@4sight.agency"
+            className="font-mono text-sm text-muted-foreground hover:text-accent transition-colors duration-200"
+          >
+            hello@4sight.agency
+          </a>
+        </div>
+      </div>
+
+      {/* Contact form heading */}
+      <div className="mb-8">
+        <h3 id="contact-form" className="font-[var(--font-bebas)] text-3xl tracking-tight flex flex-wrap items-center gap-x-[0.25em] gap-y-1">
           <img
             src="/images/engineer-logo.png"
             alt="Engineer your competitive advantage - custom software by 4Sight agency"
             className="h-[0.8em] w-auto object-contain"
           />
           <span>YOUR ADVANTAGE</span>
-        </h2>
+        </h3>
         <p className="mt-4 max-w-lg font-mono text-sm text-muted-foreground leading-relaxed">
           Let&apos;s identify the bottlenecks holding your business back and engineer a solution that drives measurable growth.
         </p>
@@ -217,32 +242,6 @@ export function ContactSection() {
               hello@4sight.agency
             </a>
           </div>
-        </div>
-      </div>
-
-      {/* Bottom footer */}
-      <div
-        ref={footerRef}
-        className="mt-24 pt-8 border-t border-border/20"
-      >
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
-          {/* Logo + tagline */}
-          <div className="flex items-center gap-6">
-            <AnimatedLogo
-              className="h-12 w-auto"
-              variant="fade-in"
-              inverted
-            />
-            <div className="h-8 w-px bg-border/30 hidden md:block" />
-            <p className="font-mono text-[10px] text-muted-foreground hidden md:block">
-              Technology should remove friction,<br />not create it.
-            </p>
-          </div>
-
-          {/* Copyright */}
-          <p className="font-mono text-[10px] text-muted-foreground uppercase tracking-widest">
-            © 2026 4Sight. All rights reserved.
-          </p>
         </div>
       </div>
     </section>

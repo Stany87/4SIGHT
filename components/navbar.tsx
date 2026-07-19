@@ -1,22 +1,74 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { AnimatedLogo } from "@/components/animated-logo"
 import { Menu, X } from "lucide-react"
 import { cn } from "@/lib/utils"
 
-const navLinks = [
-  { href: "#problem", label: "The Problem" },
-  { href: "#solutions", label: "Solutions" },
-  { href: "#work", label: "Work" },
-  { href: "#process", label: "Process" },
-  { href: "#contact", label: "Contact" },
+const solutionsDropdown = [
+  { href: "/solutions/website-development", label: "Website Development" },
+  { href: "/solutions/mobile-applications", label: "Mobile Applications" },
+  { href: "/solutions/custom-software", label: "Custom Software" },
+  { href: "/solutions/seo", label: "SEO & Performance" },
+  { href: "/solutions/ai-automation", label: "AI Automation" },
 ]
+
+const industriesDropdown = [
+  { href: "/industries/healthcare", label: "Healthcare" },
+  { href: "/industries/real-estate", label: "Real Estate" },
+  { href: "/industries/manufacturing", label: "Manufacturing" },
+  { href: "/industries/startups", label: "Startups" },
+  { href: "/industries/interior-design", label: "Interior Design" },
+  { href: "/industries/photography", label: "Photography" },
+]
+
+const navLinks = [
+  { href: "/", label: "Home" },
+  { href: "/solutions", label: "Solutions", dropdown: solutionsDropdown },
+  { href: "/industries", label: "Industries", dropdown: industriesDropdown },
+  { href: "/work", label: "Work" },
+  { href: "/process", label: "Process" },
+  { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" },
+]
+
+function DropdownMenu({
+  items,
+  isOpen,
+}: {
+  items: { href: string; label: string }[]
+  isOpen: boolean
+}) {
+  return (
+    <div
+      className={cn(
+        "absolute top-full left-1/2 -translate-x-1/2 mt-2 min-w-[220px] border border-border/40 bg-background/95 backdrop-blur-md transition-all duration-200",
+        isOpen ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-2 pointer-events-none"
+      )}
+    >
+      <div className="py-2">
+        {items.map((item) => (
+          <Link
+            key={item.href}
+            href={item.href}
+            className="block px-5 py-2.5 font-mono text-xs text-muted-foreground hover:text-accent hover:bg-accent/5 transition-colors duration-200"
+          >
+            {item.label}
+          </Link>
+        ))}
+      </div>
+    </div>
+  )
+}
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
+  const dropdownTimeout = useRef<NodeJS.Timeout | null>(null)
+  const pathname = usePathname()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,13 +78,26 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault()
+  // Close mobile menu on route change
+  useEffect(() => {
     setIsMobileMenuOpen(false)
-    const element = document.querySelector(href)
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
-    }
+    setActiveDropdown(null)
+  }, [pathname])
+
+  const handleMouseEnter = (label: string) => {
+    if (dropdownTimeout.current) clearTimeout(dropdownTimeout.current)
+    setActiveDropdown(label)
+  }
+
+  const handleMouseLeave = () => {
+    dropdownTimeout.current = setTimeout(() => {
+      setActiveDropdown(null)
+    }, 150)
+  }
+
+  const isActive = (href: string) => {
+    if (href === "/") return pathname === "/"
+    return pathname.startsWith(href)
   }
 
   return (
@@ -61,26 +126,41 @@ export function Navbar() {
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-8">
               {navLinks.map((link) => (
-                <a
+                <div
                   key={link.href}
-                  href={link.href}
-                  onClick={(e) => handleLinkClick(e, link.href)}
-                  className="font-mono text-xs uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors duration-200"
+                  className="relative"
+                  onMouseEnter={() => link.dropdown && handleMouseEnter(link.label)}
+                  onMouseLeave={() => link.dropdown && handleMouseLeave()}
                 >
-                  {link.label}
-                </a>
+                  <Link
+                    href={link.href}
+                    className={cn(
+                      "font-mono text-xs uppercase tracking-widest transition-colors duration-200",
+                      isActive(link.href)
+                        ? "text-accent"
+                        : "text-muted-foreground hover:text-foreground"
+                    )}
+                  >
+                    {link.label}
+                  </Link>
+                  {link.dropdown && (
+                    <DropdownMenu
+                      items={link.dropdown}
+                      isOpen={activeDropdown === link.label}
+                    />
+                  )}
+                </div>
               ))}
             </div>
 
             {/* CTA Button */}
             <div className="hidden md:block">
-              <a
-                href="#contact"
-                onClick={(e) => handleLinkClick(e, "#contact")}
-                className="inline-flex items-center justify-center px-5 py-2.5 font-mono text-xs uppercase tracking-widest text-background bg-foreground hover:bg-foreground/90 transition-colors duration-200"
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center px-5 py-2.5 font-mono text-xs uppercase tracking-widest text-background bg-foreground hover:bg-accent transition-colors duration-200"
               >
-                Get Started
-              </a>
+                Book a Strategy Call
+              </Link>
             </div>
 
             {/* Mobile Menu Button */}
@@ -102,34 +182,50 @@ export function Navbar() {
         <div
           className={cn(
             "md:hidden overflow-hidden transition-all duration-300 bg-background/95 backdrop-blur-md border-t border-border/20",
-            isMobileMenuOpen ? "max-h-96" : "max-h-0"
+            isMobileMenuOpen ? "max-h-[80vh] overflow-y-auto" : "max-h-0"
           )}
         >
           <div className="px-6 py-4 space-y-1">
             {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={(e) => handleLinkClick(e, link.href)}
-                className="block py-3 font-mono text-sm uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors duration-200"
-              >
-                {link.label}
-              </a>
+              <div key={link.href}>
+                <Link
+                  href={link.href}
+                  className={cn(
+                    "block py-3 font-mono text-sm uppercase tracking-widest transition-colors duration-200",
+                    isActive(link.href) ? "text-accent" : "text-muted-foreground hover:text-foreground"
+                  )}
+                >
+                  {link.label}
+                </Link>
+                {/* Mobile dropdown items */}
+                {link.dropdown && (
+                  <div className="pl-6 pb-2 space-y-1">
+                    {link.dropdown.map((item) => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        className="block py-2 font-mono text-xs text-muted-foreground hover:text-accent transition-colors"
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
             ))}
             <div className="pt-4">
-              <a
-                href="#contact"
-                onClick={(e) => handleLinkClick(e, "#contact")}
-                className="block w-full text-center py-3 font-mono text-xs uppercase tracking-widest text-background bg-foreground hover:bg-foreground/90 transition-colors duration-200"
+              <Link
+                href="/contact"
+                className="block w-full text-center py-3 font-mono text-xs uppercase tracking-widest text-background bg-foreground hover:bg-accent transition-colors duration-200"
               >
-                Get Started
-              </a>
+                Book a Strategy Call
+              </Link>
             </div>
           </div>
         </div>
       </nav>
 
-      {/* Spacer to prevent content from going under fixed navbar */}
+      {/* Spacer */}
       <div className="h-20" />
     </>
   )
